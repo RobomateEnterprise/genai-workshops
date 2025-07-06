@@ -47,3 +47,4 @@ archive/
 # Logs and databases
 *.log
 *.sqlite
+.idea
