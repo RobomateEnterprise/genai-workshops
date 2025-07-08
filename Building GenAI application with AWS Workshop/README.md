@@ -100,7 +100,7 @@ Follow the example below and replace `{your-lambda-url}` with your Lambda url fr
 ```bash
  curl -X POST 'https://f3kkw7uge2f7bn5tdojm7jp3zq0adrnn.lambda-url.us-east-1.on.aws/' \
    -H 'content-type: application/json' \
-   -d '{ "prompt": "№ 92 від 2024-04-30" }'
+   -d @payload.json
 ```
 
 The response might look like as follows:

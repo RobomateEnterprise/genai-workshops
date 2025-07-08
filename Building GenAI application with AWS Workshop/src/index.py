@@ -7,7 +7,12 @@ client = boto3.client('bedrock-agent-runtime')
 
 def handler(event, context):
     body = json.loads(event.get('body', '{}'))
-    prompt = body.get('prompt', 'What is postgres?')
+    prompt = body.get('prompt', '')
+
+    if isinstance(prompt, dict):
+        # Convert nested object into readable key-value lines
+        prompt = '\n'.join(f"{k}: {v}" for k, v in prompt.items())
+
     response = client.retrieve_and_generate(
         input={
             'text': prompt
