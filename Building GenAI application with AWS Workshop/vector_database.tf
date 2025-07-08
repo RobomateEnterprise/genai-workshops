@@ -146,6 +146,9 @@ resource "null_resource" "db_setup" {
       DB_NAME    = module.aurora_postgresql_v2.cluster_database_name
       SECRET_ARN = module.aurora_postgresql_v2.cluster_master_user_secret[0].secret_arn
       REGION     = data.aws_region.current.id
+      AWS_ACCESS_KEY_ID      = var.aws_access_key
+      AWS_SECRET_ACCESS_KEY  = var.aws_secret_key
+      AWS_DEFAULT_REGION     = var.aws_region
     }
     interpreter = ["bash", "-c"]
   }

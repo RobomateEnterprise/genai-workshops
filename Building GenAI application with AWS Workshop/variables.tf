@@ -77,3 +77,15 @@ variable "bedrock_kb_db_table_name" {
   type        = string
   default     = "bedrock_integration.bedrock_kb"
 }
+
+variable "aws_access_key" {
+  type        = string
+  description = "AWS access key for both Terraform and the local-exec provisioner"
+}
+
+variable "aws_secret_key" {
+  type        = string
+  description = "AWS secret key for both Terraform and the local-exec provisioner"
+  sensitive   = true
+}
+

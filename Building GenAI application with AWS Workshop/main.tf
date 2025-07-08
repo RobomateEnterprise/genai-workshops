@@ -21,6 +21,23 @@ resource "aws_iam_role" "bedrock_service_role" {
   tags = var.aws_resource_tags
 }
 
+# ────────────────────────────────────────────────────────────────────────────────
+# Inline policy that grants the Bedrock service role permissions to read your RDS
+# master‑user secret (so Bedrock can fetch DB creds)
+resource "aws_iam_role_policy" "bedrock_secret_read" {
+  name = "BedrockReadSecret"
+  role = aws_iam_role.bedrock_service_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect   = "Allow"
+      Action   = "secretsmanager:GetSecretValue"
+      Resource = module.aurora_postgresql_v2.cluster_master_user_secret[0].secret_arn
+    }]
+  })
+}
+
 resource "aws_iam_role_policy" "bedrock_service_role_policy" {
   name = "bedrock_service_role_policy"
   role = aws_iam_role.bedrock_service_role.id
@@ -98,7 +115,7 @@ resource "awscc_bedrock_knowledge_base" "genai-bedrock-kb" {
   storage_configuration = {
     type = "RDS"
     rds_configuration = {
-      credentials_secret_arn = module.vector_store_bedrock_secret.secret_arn
+      credentials_secret_arn = module.aurora_postgresql_v2.cluster_master_user_secret[0].secret_arn
       database_name          = var.bedrock_kb_db_name
       resource_arn           = module.aurora_postgresql_v2.cluster_arn
       table_name             = var.bedrock_kb_db_table_name

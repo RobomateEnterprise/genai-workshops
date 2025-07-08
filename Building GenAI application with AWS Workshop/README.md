@@ -98,9 +98,9 @@ see [Model access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-ac
 Follow the example below and replace `{your-lambda-url}` with your Lambda url from step 8 of Deployment.
 
 ```bash
- curl -X POST 'https://{your-lambda-url}/' \
+ curl -X POST 'https://f3kkw7uge2f7bn5tdojm7jp3zq0adrnn.lambda-url.us-east-1.on.aws/' \
    -H 'content-type: application/json' \
-   -d '{ "prompt": "Describe how pg_stat_io tracks I/O activity in PostgreSQL." }'
+   -d '{ "prompt": "№ 92 від 2024-04-30" }'
 ```
 
 The response might look like as follows:

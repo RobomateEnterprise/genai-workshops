@@ -1,11 +1,11 @@
 provider "aws" {
-  region     = "us-east-1"                      # ← your region
-  access_key = "..."            # ← your AWS Access Key
-  secret_key = "..."  # ← your AWS Secret Key
+  region     = var.aws_region
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 provider "awscc" {
-  region     = "us-east-1"
-  access_key = "..."
-  secret_key = "..."
+  region     = var.aws_region
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }

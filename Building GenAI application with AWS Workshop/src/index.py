@@ -24,7 +24,10 @@ def handler(event, context):
     response_body = response.get('output', '{}').get('text', '<Empty text>')
     return {
         'statusCode': 200,
+        'headers': {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
         'body': json.dumps({
             'genai_response': response_body
-        })
+        }, ensure_ascii=False)
     }
